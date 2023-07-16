@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  oracle:
+    container_name: flask-api-oracle
+    build:
+      context: ./oraculo
+      dockerfile: Dockerfile
+    expose:
+      - 5000
+    ports:
+      - "5000:5000"
+    networks:
+      - bridge
+    volumes:
+      - ./oraculo:/app
+
+  tmi:
+    container_name: tmi-api-oracle
+    build:
+      context: twitch-bot-gpt
+      dockerfile: Dockerfile
+    networks:
+      - bridge
+    volumes:
+      - ./twitch-bot-gpt:/app
+
+networks:
+  bridge:
